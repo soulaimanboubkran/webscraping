@@ -1,3 +1,4 @@
+import PriceInfoCard from '@/components/ProductInfoCard';
 import { getProduct } from '@/lib/actions'
 import { formatNumber } from '@/lib/utils';
 
@@ -22,62 +23,58 @@ const ProductDetails =async ({params:{id}}:Props) => {
             className="mx-auto"
           />
         </div>
-    <div className="flex-1 flex flex-col">
-    <div className="flex justify-between items-start gap-5 flex-wrap pb-6">
-      <div className="flex flex-col gap-3">
-        <p className="text-[28px] text-secondary font-semibold">
-          {product.title}
-        </p>
 
-        <Link
-          href={product.url}
-          target="_blank"
-          className="text-base flex font-bold text-black opacity-50"
-        >
-            
+        <div className="flex-1 flex flex-col">
+          <div className="flex justify-between items-start gap-5 flex-wrap pb-6">
+            <div className="flex flex-col gap-3">
+              <p className="text-[28px] text-secondary font-semibold">
+                {product.title}
+              </p>
 
-            
-          Visit Product
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 font-bold mt-1 text-black h-4">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-</svg>
-        </Link>
-      </div>
+              <Link
+                href={product.url}
+                target="_blank"
+                className="text-base text-black opacity-50"
+              >
+                Visit Product
+              </Link>
+            </div>
 
-      <div className="flex items-center gap-3">
-        <div className="product-hearts">
-          <Image 
-            src="/assets/icons/red-heart.svg"
-            alt="heart"
-            width={20}
-            height={20}
-          />
+            <div className="flex items-center gap-3">
+              <div className="product-hearts">
+                <Image 
+                  src="/assets/icons/red-heart.svg"
+                  alt="heart"
+                  width={20}
+                  height={20}
+                />
 
-          <p className="text-base font-semibold text-[#D46F77]">
-            {product.reviewsCount}
-          </p>
-        </div>
+                <p className="text-base font-semibold text-[#D46F77]">
+                  {product.reviewsCount}
+                </p>
+              </div>
 
-        <div className="p-2 bg-white-200 rounded-10">
-          <Image 
-            src="/assets/icons/bookmark.svg"
-            alt="bookmark"
-            width={20}
-            height={20}
-          />
-        </div>
+              <div className="p-2 bg-white-200 rounded-10">
+                <Image 
+                  src="/assets/icons/bookmark.svg"
+                  alt="bookmark"
+                  width={20}
+                  height={20}
+                />
+              </div>
 
-        <div className="p-2 bg-white-200 rounded-10">
-          <Image 
-            src="/assets/icons/share.svg"
-            alt="share"
-            width={20}
-            height={20}
-          />
-        </div>
-      </div>
-    </div>
-    <div className="product-info">
+              <div className="p-2 bg-white-200 rounded-10">
+                <Image 
+                  src="/assets/icons/share.svg"
+                  alt="share"
+                  width={20}
+                  height={20}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="product-info">
             <div className="flex flex-col gap-2">
               <p className="text-[34px] text-secondary font-bold">
                 {product.currency} {formatNumber(product.currentPrice)}
@@ -121,9 +118,62 @@ const ProductDetails =async ({params:{id}}:Props) => {
             </div>
           </div>
 
-</div>
-</div>
-</div>
+          <div className="my-7 flex flex-col gap-5">
+            <div className="flex gap-5 flex-wrap">
+              <PriceInfoCard 
+                title="Current Price"
+                iconSrc="/assets/icons/price-tag.svg"
+                value={`${product.currency} ${formatNumber(product.currentPrice)}`}
+              />
+              <PriceInfoCard 
+                title="Average Price"
+                iconSrc="/assets/icons/chart.svg"
+                value={`${product.currency} ${formatNumber(product.averagePrice)}`}
+              />
+              <PriceInfoCard 
+                title="Highest Price"
+                iconSrc="/assets/icons/arrow-up.svg"
+                value={`${product.currency} ${formatNumber(product.highestPrice)}`}
+              />
+              <PriceInfoCard 
+                title="Lowest Price"
+                iconSrc="/assets/icons/arrow-down.svg"
+                value={`${product.currency} ${formatNumber(product.lowestPrice)}`}
+              />
+            </div>
+          </div>
+
+       
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-5">
+          <h3 className="text-2xl text-secondary font-semibold">
+            Product Description
+          </h3>
+
+          <div className="flex flex-col gap-4">
+            {product?.description?.split('\n')}
+          </div>
+        </div>
+
+        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
+          <Image 
+            src="/assets/icons/bag.svg"
+            alt="check"
+            width={22}
+            height={22}
+          />
+
+          <Link href="/" className="text-base text-white">
+            Buy Now
+          </Link>
+        </button>
+      </div>
+
+     
+    </div>
   )
 }
 
