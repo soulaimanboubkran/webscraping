@@ -67,3 +67,19 @@ export async function getProducts(){
         console.log(error)
     }
 }
+
+export async function getSimilerProducts(productId:string){
+    try {
+        const currentProduct= await Product.findById(productId);
+        if(!currentProduct) return null;
+
+        const similerProducts = await Product.find({
+            _id:{$ne:productId},
+            
+        }).limit(3);
+
+        return similerProducts;
+    } catch (error) {
+        console.log(error)
+    }
+}
