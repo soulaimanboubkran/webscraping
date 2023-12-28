@@ -1,3 +1,4 @@
+import Model from '@/components/Model';
 import ProductCard from '@/components/ProductCard';
 import PriceInfoCard from '@/components/ProductInfoCard';
 import { getProduct, getSimilerProducts } from '@/lib/actions'
@@ -145,7 +146,7 @@ const ProductDetails =async ({params:{id}}:Props) => {
             </div>
           </div>
 
-       
+       <Model  productId={id}/>
         </div>
       </div>
 
